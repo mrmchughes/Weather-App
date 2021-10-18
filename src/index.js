@@ -1,20 +1,83 @@
-// Console log test works, everything set up correctly
-console.log("testing!");
+const cityName = document.getElementById("cityName");
+const weatherType = document.getElementById("weatherType");
+const temperature = document.getElementById("temp");
+const tempFeels = document.getElementById("tempFeels");
+const humidity = document.getElementById("humidity");
+const windSpeed = document.getElementById("windSpeed");
 
 // Function to search Weather API using location
-function weatherSearch() {
-  // Take a location
-  // Access Weather API using the location
+async function weatherSearchFahrenheit(e) {
+  // Take a submitted location
+  e.preventDefault();
+  console.log("New weather search!");
+  const searchTerm = document.querySelector("#weatherSearchInput").value;
+  console.log("This is the current value of search term: " + searchTerm);
+
+  try {
+    const response = await fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        searchTerm +
+        "&units=imperial&appid=e1e165ab654f897773dcd2276f118a81",
+      { mode: "cors" }
+    );
+    const returnedWeather = await response.json();
+
+    console.log(returnedWeather);
+    // Consider rewording
+
+    cityName.innerHTML = returnedWeather.name;
+    weatherType.innerHTML = returnedWeather.weather[0].description + ".";
+    temperature.innerHTML = returnedWeather.main.temp + " degrees Fahrenheit.";
+    tempFeels.innerHTML =
+      returnedWeather.main.feels_like + " degrees Fahrenheit.";
+    windSpeed.innerHTML = returnedWeather.wind.speed + " mph.";
+    humidity.innerHTML = returnedWeather.main.humidity + ".";
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+async function weatherSearchCelsius(e) {
+  // Take a submitted location
+  e.preventDefault();
+  console.log("New weather search!");
+  const searchTerm = document.querySelector("#weatherSearchInput").value;
+  console.log("This is the current value of search term: " + searchTerm);
+
+  try {
+    const response = await fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        searchTerm +
+        "&units=metric&appid=e1e165ab654f897773dcd2276f118a81",
+      { mode: "cors" }
+    );
+    const returnedWeather = await response.json();
+    console.log(returnedWeather);
+    // Consider rewording
+
+    cityName.innerHTML = returnedWeather.name;
+    weatherType.innerHTML = returnedWeather.weather[0].description + ".";
+    temperature.innerHTML = returnedWeather.main.temp + " degrees Celsius.";
+    tempFeels.innerHTML = returnedWeather.main.feels_like + " degrees Celsius.";
+    windSpeed.innerHTML = returnedWeather.wind.speed + " mph.";
+    humidity.innerHTML = returnedWeather.main.humidity + ".";
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Need a submit button, Fahrenheit by default
+// A toggle button to switch between Fahrenheit and Celsius?
+
+const fahrenheitButton = document.getElementById("fahrenheitButton");
+fahrenheitButton.addEventListener("click", weatherSearchFahrenheit);
+
+const celciusButton = document.getElementById("celciusButton");
+celciusButton.addEventListener("click", weatherSearchCelsius);
 
 // Function to retrieve weather data for submitted location
 function returnWeatherData() {
   // Return weather JSON data for location from weatherSearch()
-}
-
-// Toggle display data in Fahrenheit or Celsius
-function toggleDisplayTemp() {
-  // Toggle temperature between Fahrenheit or Celsius
 }
 
 // Function to process JSON data from the API
@@ -32,6 +95,11 @@ function weatherDataObject() {
 function formSubmitWeather() {
   // Simple Form, user can input location
   // Runs appropriate above functions with user location
+}
+
+// Toggle display data in Fahrenheit or Celsius
+function toggleDisplayTemp() {
+  // Toggle temperature between Fahrenheit or Celsius
 }
 
 // Optional loading component that displays while data is being retrieved
