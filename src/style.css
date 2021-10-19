@@ -1,7 +1,14 @@
+body {
+  background-image: url(/stars.jpg);
+}
+
 .dataDiv {
+  margin-top: 10px;
+  border: 1px solid purple;
 }
 
 div {
+  color: white;
 }
 
 label {

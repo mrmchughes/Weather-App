@@ -1,9 +1,12 @@
+import "./style.css";
+
 const cityName = document.getElementById("cityName");
 const weatherType = document.getElementById("weatherType");
 const temperature = document.getElementById("temp");
 const tempFeels = document.getElementById("tempFeels");
-const humidity = document.getElementById("humidity");
 const windSpeed = document.getElementById("windSpeed");
+const humidity = document.getElementById("humidity");
+const pressure = document.getElementById("pressure");
 
 // Function to search Weather API using location
 async function weatherSearchFahrenheit(e) {
@@ -31,7 +34,8 @@ async function weatherSearchFahrenheit(e) {
     tempFeels.innerHTML =
       returnedWeather.main.feels_like + " degrees Fahrenheit.";
     windSpeed.innerHTML = returnedWeather.wind.speed + " mph.";
-    humidity.innerHTML = returnedWeather.main.humidity + ".";
+    humidity.innerHTML = returnedWeather.main.humidity + "%";
+    pressure.innerHTML = returnedWeather.main.pressure;
   } catch (error) {
     console.log(error);
   }
@@ -60,14 +64,14 @@ async function weatherSearchCelsius(e) {
     temperature.innerHTML = returnedWeather.main.temp + " degrees Celsius.";
     tempFeels.innerHTML = returnedWeather.main.feels_like + " degrees Celsius.";
     windSpeed.innerHTML = returnedWeather.wind.speed + " mph.";
-    humidity.innerHTML = returnedWeather.main.humidity + ".";
+    humidity.innerHTML = returnedWeather.main.humidity + "%";
+    pressure.innerHTML = returnedWeather.main.pressure;
   } catch (error) {
     console.log(error);
   }
 }
 
-// Need a submit button, Fahrenheit by default
-// A toggle button to switch between Fahrenheit and Celsius?
+// Need a catch if the city entered does not exsist
 
 const fahrenheitButton = document.getElementById("fahrenheitButton");
 fahrenheitButton.addEventListener("click", weatherSearchFahrenheit);
