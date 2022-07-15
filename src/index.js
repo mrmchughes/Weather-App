@@ -1,5 +1,9 @@
 import "./style.css";
 
+require("dotenv").config();
+
+const { APIID } = process.env;
+
 const cityName = document.getElementById("cityName");
 const weatherType = document.getElementById("weatherType");
 const temperature = document.getElementById("temp");
@@ -14,7 +18,8 @@ async function weatherSearchFahrenheit() {
     const response = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         document.querySelector("#weatherSearchInput").value +
-        "&units=imperial&appid=e1e165ab654f897773dcd2276f118a81",
+        "&units=imperial&" +
+        APIID,
       { mode: "cors" }
     );
     const returnedWeather = await response.json();
@@ -40,7 +45,8 @@ async function weatherSearchCelsius() {
     const response = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         document.querySelector("#weatherSearchInput").value +
-        "&units=metric&appid=e1e165ab654f897773dcd2276f118a81",
+        "&units=metric&" +
+        APIID,
       { mode: "cors" }
     );
     const returnedWeather = await response.json();
