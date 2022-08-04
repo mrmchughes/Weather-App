@@ -1,6 +1,8 @@
 # Weather-App
 This is my implementation of The Odin Project's Weather App project. 
 
+[Live Demo](https://mrmchughes.github.io/Weather-App/)
+
 # Motivation
 I created this project as part of The Odin Project's JavaScript curriculum.
 
